@@ -18,7 +18,7 @@
 <script>
     async function getUsers() {
         console.log("aaa")
-        const response = await fetch('http://localhost:3000/api/users', {
+        const response = await fetch('https://app-noisy-hedgehog-dk.cfapps.eu10.hana.ondemand.com/api/users', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -29,14 +29,18 @@
             .then(data => {
                 console.log(data);
                 let a = [];
-                for(i = 0; i<data.length; i++){
+                for (i = 0; i < data.length; i++) {
                     console.log(data[i].USERNAME);
                     a.push(" " + data[i].USERNAME + " ");
                 }
-                document.getElementById("usersLabel").innerHTML  = "Users : [ " + a + " ]";
+                document.getElementById("usersLabel").innerHTML = "Users : [ " + a + " ]";
                 console.log(data.length)
             });
     }
 </script>
+
+<script src="https://cdn.cai.tools.sap/webchat/webchat.js" channelId="9b2c3cea-5381-47d4-9a19-f8536278190c"
+    token="182d01dc7d9b081a6a2e6a6615ca92e8" id="cai-webchat">
+    </script>
 
 </html>
