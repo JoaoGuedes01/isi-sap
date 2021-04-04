@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ISI TP</title>
+</head>
+
+<body onload="getUsers()">
+    <div style="text-align: center;">
+        <label style="font-size: 50px;">Dashboard</label>
+        <button onclick="window.location.href='/frontend/login'">Logout</button>
+    </div>
+    <div>
+        <label id="usersLabel"></label>
+    </div>
+</body>
+
+<script>
+    async function getUsers() {
+        console.log("aaa")
+        const response = await fetch('http://localhost:3000/api/users', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors',
+            method: 'GET',
+        }).then(res => res.json())
+            .then(data => {
+                console.log(data);
+                let a = [];
+                for(i = 0; i<data.length; i++){
+                    console.log(data[i].USERNAME);
+                    a.push(" " + data[i].USERNAME + " ");
+                }
+                document.getElementById("usersLabel").innerHTML  = "Users : [ " + a + " ]";
+                console.log(data.length)
+            });
+    }
+</script>
+
+</html>

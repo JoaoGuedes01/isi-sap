@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ISI TP</title>
+</head>
+
+<body>
+    <div style="text-align: center;">
+        <label style="font-size: 50px;">Login</label>
+        <button onclick="window.location.href='/frontend/register'">Register</button>
+    </div>
+    <div style="text-align: center; padding-top: 5rem;">
+        <label>username</label>
+        <input type="text" id="username" required></div></body>
+    </div>
+    <div style="text-align: center; padding-top: 1rem;">
+        <label>Password</label>
+        <input type="text" id="password" required></div></body>
+    </div>
+    <div style="text-align: center; padding-top: 2rem;">
+        <button onclick="login()">Login</button>
+    </div>
+</body>
+
+<script>
+    async function login(){
+        let data ={
+        username: document.getElementById("username").value,
+        password: document.getElementById("password").value
+    }
+    const response = await fetch('http://localhost:3000/api/login', {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            mode: 'cors',
+            method: 'POST',
+            body: JSON.stringify(data),
+            credentials: 'include'
+        }).then(res => res.json())
+          .then(data => {
+            alert(data.message);
+            console.log(data.estado);
+            if (data.estado == 1){
+                window.location.href = "http://localhost:3000/frontend/dashboard";
+            }
+          });
+    }
+</script>
+
+</html>>

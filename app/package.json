@@ -1,0 +1,17 @@
+{
+  "name": "isi-tp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/hana-client": "^2.7.26",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
