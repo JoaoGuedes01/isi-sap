@@ -6,19 +6,19 @@ const port = 8080;
 const conn = hana.createConnection();
 const path = require('path');
 const conn_params = {
-    serverNode: 'e02ee0c0-925b-4d61-a958-609421a5ccca.hana.trial-us10.hanacloud.ondemand.com:443',
+    serverNode: '7842c754-5846-4170-9a9f-f5bb5e3cece9.hana.trial-us10.hanacloud.ondemand.com:443',
     uid: 'DBADMIN',
-    pwd: 'Pirocas123'
+    pwd: 'Isitp123'
 };
 const dbcon = conn.connect(conn_params, function (err) {
-    if (err) console.log("Error");
+    if (err) console.log("Error: "+err);
     console.log("DB Connected");
 });
 
 app.use(bodyParser.json())
 
 app.get('/api/users', (req, res) => {
-    conn.exec('SELECT * FROM CONAS.USER;', function (err, result) {
+    conn.exec('SELECT * FROM ISI.USER;', function (err, result) {
         if (err) throw err;
         return res.send(result);
     });
@@ -30,7 +30,7 @@ app.post('/api/login', (req, res) => {
         password: req.body.password
     }
 
-    conn.exec("SELECT * FROM CONAS.USER WHERE username='" + data.username + "';", function (err, result) {
+    conn.exec("SELECT * FROM ISI.USER WHERE username='" + data.username + "';", function (err, result) {
         if (err) throw err;
         if (!result[0]) return res.send({ message: "Nao ha users com esse username" });
         corret_password = result[0].PASSWORD;
@@ -53,11 +53,11 @@ app.post('/api/users', (req, res) => {
 
     if (data.password != data.passwordConf) return res.send({ message: "Passwords nao sao iguais" })
 
-    conn.exec("SELECT * FROM CONAS.USER WHERE username='" + data.username + "';", function (err, result) {
+    conn.exec("SELECT * FROM ISI.USER WHERE username='" + data.username + "';", function (err, result) {
         if (err) throw err;
         console.log(result);
         if (result[0]) return res.send({ message: "Ja existe um user com esse username" });
-        conn.exec("INSERT INTO CONAS.USER (username,first_name,last_name,password) VALUES ('" + data.username + "','" + data.first_name + "','" + data.last_name + "','" + data.password + "');", function (err) {
+        conn.exec("INSERT INTO ISI.USER (username,first_name,last_name,password) VALUES ('" + data.username + "','" + data.first_name + "','" + data.last_name + "','" + data.password + "');", function (err) {
             if (err) throw err;
             return res.send({ message: "User criado com successo" });
         });
